@@ -6,12 +6,15 @@ import Categories from "../pages/admin/Categories";
 import Employees from "../pages/admin/Employees";
 import Products from "../pages/admin/Products";
 import TransactionHistory from "../pages/admin/TransactionHistory";
+import Suppliers from "../pages/admin/Suppliers";
+import Imports from "../pages/admin/Imports";
 import Login from "../pages/Login";
 import Inventory from "../pages/staff/Inventory";
 import POS from "../pages/staff/POS";
 import StaffDashboard from "../pages/staff/StaffDashboard";
 import StaffOrders from "../pages/staff/StaffOrders";
 import VNPayReturn from "../pages/staff/VNPayReturn";
+import Profile from "../pages/Profile";
 import useAuthStore from "../store/useAuthStore";
 import NotFound from "./NotFound";
 import ProtectedRoute from "./ProtectedRoute";
@@ -49,7 +52,10 @@ const AppRouter = () => (
         <Route path="employees" element={<Employees />} />
         <Route path="products" element={<Products />} />
         <Route path="categories" element={<Categories />} />
+        <Route path="suppliers" element={<Suppliers />} />
+        <Route path="imports" element={<Imports />} />
         <Route path="history" element={<TransactionHistory />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
 
       <Route
@@ -65,6 +71,7 @@ const AppRouter = () => (
         <Route path="pos" element={<POS />} />
         <Route path="inventory" element={<Inventory />} />
         <Route path="orders" element={<StaffOrders />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

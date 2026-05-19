@@ -1,6 +1,8 @@
-﻿import { TrendingUp, DollarSign, ShoppingBag, ArrowUpRight, ArrowDownRight, Activity, Package } from "lucide-react";
+import { useState } from "react";
+import { TrendingUp, DollarSign, ShoppingBag, ArrowUpRight, ArrowDownRight, Activity, Package } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { statisticApi } from "../../api/statistic.api";
+import Breadcrumb from "../../components/Breadcrumb";
 import {
   AreaChart,
   Area,
@@ -62,9 +64,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const Dashboard = () => {
+  const [range, setRange] = useState("30");
+
   const { data: stats, isLoading } = useQuery({
-    queryKey: ["dashboard-stats"],
-    queryFn: () => statisticApi.getDashboard(),
+    queryKey: ["dashboard-stats", range],
+    queryFn: () => statisticApi.getDashboard({ days: range }),
     refetchInterval: 60000,
   });
 
@@ -75,16 +79,25 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm sm:flex-row sm:items-center md:p-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800">Bảng Điều Khiển Vận Hành</h2>
-          <p className="text-gray-500 text-sm mt-1">Theo dõi hiệu suất cửa hàng và doanh thu theo thời gian thực.</p>
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-4">
+          <Breadcrumb 
+            items={[
+              { label: "Trang chủ" },
+              { label: "Tổng quan", active: true }
+            ]} 
+          />
+
         </div>
         <div className="flex space-x-2">
-          <select className="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-primary/50 outline-none cursor-pointer hover:bg-gray-100 transition">
-            <option>Hôm nay</option>
-            <option>7 ngày gần nhất</option>
-            <option selected>30 ngày gần nhất</option>
+          <select 
+            value={range}
+            onChange={(e) => setRange(e.target.value)}
+            className="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-primary/50 outline-none cursor-pointer hover:bg-gray-100 transition"
+          >
+            <option value="1">Hôm nay</option>
+            <option value="7">7 ngày gần nhất</option>
+            <option value="30">30 ngày gần nhất</option>
           </select>
         </div>
       </div>

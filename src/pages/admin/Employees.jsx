@@ -20,6 +20,7 @@ import {
 import { userApi } from "../../api/user.api";
 import toast from "react-hot-toast";
 import useAuthStore from "../../store/useAuthStore";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const Employees = () => {
   const queryClient = useQueryClient();
@@ -155,22 +156,21 @@ const Employees = () => {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="flex items-center text-2xl font-black tracking-tight text-gray-900 md:text-3xl">
-            <Users className="w-8 h-8 mr-3 text-primary stroke-[2.5px]" />
-            Thành Viên Nhân Sự
-          </h1>
-          <p className="text-gray-500 font-medium mt-1">
-            Tổng quan nhân sự và quyền truy cập của cửa hàng.
-          </p>
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-4">
+          <Breadcrumb 
+            items={[
+              { label: "Trang chủ" },
+              { label: "Nhân sự", active: true }
+            ]} 
+          />
         </div>
         <button
           onClick={() => openModal()}
-          className="flex w-full items-center justify-center space-x-2 rounded-2xl bg-primary px-6 py-3.5 font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-dark active:scale-95 sm:w-auto"
+          className="flex items-center justify-center space-x-2 rounded-2xl bg-gradient-to-r from-primary to-primary-dark px-6 py-4 font-black text-white shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95"
         >
           <Plus className="w-5 h-5" />
-          <span>Thêm nhân viên</span>
+          <span>THÊM NHÂN VIÊN</span>
         </button>
       </div>
 

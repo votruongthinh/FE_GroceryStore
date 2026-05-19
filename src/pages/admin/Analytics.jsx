@@ -1,5 +1,7 @@
-﻿import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { statisticApi } from "../../api/statistic.api";
+import Breadcrumb from "../../components/Breadcrumb";
 import {
   BarChart,
   Bar,
@@ -61,9 +63,23 @@ const CustomTooltip = ({ active, payload, label, suffix = "đ" }) => {
 };
 
 const Analytics = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filterType, setFilterType] = useState("month"); // month, week, custom
+  const [customRange, setCustomRange] = useState({ from: "", to: "" });
+  const itemsPerPage = 5;
+
+  const getQueryParams = () => {
+    if (filterType === "week") return { days: 7 };
+    if (filterType === "month") return { days: 30 };
+    if (filterType === "custom" && customRange.from && customRange.to) {
+      return { fromDate: customRange.from, toDate: customRange.to };
+    }
+    return { days: 30 };
+  };
+
   const { data: analytics, isLoading } = useQuery({
-    queryKey: ["admin-analytics"],
-    queryFn: () => statisticApi.getAnalytics(),
+    queryKey: ["admin-analytics", filterType, customRange],
+    queryFn: () => statisticApi.getAnalytics(getQueryParams()),
     refetchInterval: 300000,
   });
 
@@ -89,17 +105,62 @@ const Analytics = () => {
     summary,
   } = analytics;
 
+  const totalPages = Math.ceil(topProducts.length / itemsPerPage);
+  const currentProducts = topProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <div className="space-y-4 pb-10 md:space-y-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-black tracking-tight text-gray-900 md:text-4xl">Phân Tích Kinh Doanh</h1>
-          <p className="text-gray-500 font-medium mt-1">Trực quan dữ liệu và xu hướng bán hàng nâng cao.</p>
+        <div className="space-y-4">
+          <Breadcrumb 
+            items={[
+              { label: "Trang chủ" },
+              { label: "Phân tích doanh thu", active: true }
+            ]} 
+          />
         </div>
-        <div className="flex items-center space-x-2 overflow-x-auto rounded-2xl border border-gray-100 bg-white p-1 shadow-sm">
-          <button className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-md">Theo tháng</button>
-          <button className="px-4 py-2 text-gray-400 text-xs font-bold hover:bg-gray-50 rounded-xl transition">Theo tuần</button>
-          <button className="px-4 py-2 text-gray-400 text-xs font-bold hover:bg-gray-50 rounded-xl transition">Tùy chỉnh</button>
+        <div className="flex flex-col items-end gap-2">
+          <div className="flex items-center space-x-2 overflow-x-auto rounded-2xl border border-gray-100 bg-white p-1 shadow-sm">
+            <button 
+              onClick={() => setFilterType("month")}
+              className={`px-4 py-2 text-xs font-bold rounded-xl transition ${filterType === "month" ? "bg-primary text-white shadow-md" : "text-gray-400 hover:bg-gray-50"}`}
+            >
+              Theo tháng
+            </button>
+            <button 
+              onClick={() => setFilterType("week")}
+              className={`px-4 py-2 text-xs font-bold rounded-xl transition ${filterType === "week" ? "bg-primary text-white shadow-md" : "text-gray-400 hover:bg-gray-50"}`}
+            >
+              Theo tuần
+            </button>
+            <button 
+              onClick={() => setFilterType("custom")}
+              className={`px-4 py-2 text-xs font-bold rounded-xl transition ${filterType === "custom" ? "bg-primary text-white shadow-md" : "text-gray-400 hover:bg-gray-50"}`}
+            >
+              Tùy chỉnh
+            </button>
+          </div>
+          
+          {filterType === "custom" && (
+            <div className="flex items-center space-x-2 bg-white p-2 rounded-2xl border border-gray-100 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300">
+              <input 
+                type="date" 
+                value={customRange.from}
+                onChange={(e) => setCustomRange(prev => ({ ...prev, from: e.target.value }))}
+                className="text-xs font-bold text-gray-600 bg-gray-50 border-none rounded-lg focus:ring-0"
+              />
+              <span className="text-gray-300 font-bold text-xs">→</span>
+              <input 
+                type="date" 
+                value={customRange.to}
+                onChange={(e) => setCustomRange(prev => ({ ...prev, to: e.target.value }))}
+                className="text-xs font-bold text-gray-600 bg-gray-50 border-none rounded-lg focus:ring-0"
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -151,7 +212,7 @@ const Analytics = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 md:gap-8">
-        <AnalyticsCard title="Diễn biến doanh thu (30 ngày)" icon={BarChart2}>
+        <AnalyticsCard title={`Diễn biến doanh thu (${filterType === "week" ? "7 ngày" : filterType === "custom" ? "Tùy chỉnh" : "30 ngày"})`} icon={BarChart2}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={revenueByDay} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
@@ -243,7 +304,6 @@ const Analytics = () => {
           <h3 className="text-xl font-bold text-gray-800 flex items-center">
             <Package className="w-6 h-6 mr-3 text-primary" /> Sản phẩm hiệu suất cao
           </h3>
-          <button className="text-xs font-black text-primary uppercase tracking-widest hover:underline">Xuất báo cáo</button>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-[780px] w-full text-left">
@@ -256,7 +316,7 @@ const Analytics = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
-              {topProducts.map((p, i) => (
+              {currentProducts.map((p, i) => (
                 <tr key={i} className="hover:bg-gray-50/30 transition-colors">
                   <td className="px-4 py-4 md:px-8 md:py-5">
                     <div className="flex items-center space-x-4">
@@ -264,7 +324,7 @@ const Analytics = () => {
                         {p.image ? (
                           <img src={`http://localhost:3069/images/${p.image}`} className="w-full h-full object-cover" />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center font-bold text-gray-300">#{i + 1}</div>
+                          <div className="w-full h-full flex items-center justify-center font-bold text-gray-300">#{(currentPage - 1) * itemsPerPage + i + 1}</div>
                         )}
                       </div>
                       <div>
@@ -293,6 +353,30 @@ const Analytics = () => {
             </tbody>
           </table>
         </div>
+        
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between border-t border-gray-50 p-4 md:px-8 md:py-6">
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+              Trang {currentPage} / {totalPages}
+            </p>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 text-xs font-bold text-gray-500 bg-gray-50 rounded-xl hover:bg-gray-100 disabled:opacity-50 transition"
+              >
+                Trước
+              </button>
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 text-xs font-bold text-gray-500 bg-gray-50 rounded-xl hover:bg-gray-100 disabled:opacity-50 transition"
+              >
+                Sau
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

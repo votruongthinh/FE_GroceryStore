@@ -5,4 +5,6 @@ export const authApi = {
   register: (data) => axiosClient.post("/auth/register", data),
   logout: () => axiosClient.post("/auth/logout"), // optional if backend supports, otherwise just clear frontend state
   getInfo: () => axiosClient.get("/auth/get-info"),
+  updateProfile: (data) => axiosClient.patch("/auth/update-profile", data),
+  changePassword: (data) => axiosClient.patch("/auth/change-password", data),
 };

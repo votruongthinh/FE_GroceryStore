@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { orderApi } from "../../api/order.api";
 import { History, Calendar, X, FileText, Download, CheckCircle2 } from "lucide-react";
 import { BASE_URL } from "../../api/axiosClient";
+import Breadcrumb from "../../components/Breadcrumb";
 
 const TransactionHistory = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
@@ -37,21 +38,24 @@ const TransactionHistory = () => {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:flex-row md:items-center md:p-6">
-        <div>
-          <h2 className="text-xl font-bold text-gray-800 flex items-center">
-            <History className="w-6 h-6 mr-2 text-primary" /> Lịch sử giao dịch
-          </h2>
-          <p className="text-gray-500 text-sm mt-1">Xem nhật ký và chi tiết giao dịch theo ngày</p>
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-4">
+          <Breadcrumb 
+            items={[
+              { label: "Trang chủ" },
+              { label: "Lịch sử giao dịch", active: true }
+            ]} 
+          />
+          
         </div>
 
-        <div className="flex w-full items-center space-x-3 rounded-xl border border-gray-200 bg-gray-50 p-2 sm:w-auto">
-          <Calendar className="w-5 h-5 text-gray-400 ml-2" />
+        <div className="flex items-center space-x-3 rounded-[1.5rem] border border-gray-100 bg-white p-3 shadow-sm">
+          <Calendar className="w-5 h-5 text-primary ml-2" />
           <input
             type="date"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="bg-transparent border-none focus:ring-0 text-sm font-medium text-gray-700 outline-none pr-2"
+            className="bg-transparent border-none focus:ring-0 text-sm font-black text-gray-700 outline-none pr-4 cursor-pointer"
           />
         </div>
       </div>
