@@ -7,8 +7,8 @@ const StatCard = ({ title, value, icon: Icon, subtitle, colorClass }) => (
   <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
     <div className="flex items-start justify-between">
       <div>
-        <p className="text-sm text-gray-500 font-medium">{title}</p>
-        <p className="text-3xl font-black text-gray-900 mt-1">{value}</p>
+        <p className="text-sm text-slate-500 font-medium">{title}</p>
+        <p className="text-3xl font-bold text-slate-900 mt-1">{value}</p>
         {subtitle ? <p className="text-xs text-gray-400 mt-1">{subtitle}</p> : null}
       </div>
       <div className={`p-3 rounded-xl ${colorClass}`}>
@@ -23,8 +23,8 @@ const CurrencyTooltip = ({ active, payload, label }) => {
 
   return (
     <div className="bg-white border border-gray-100 shadow-lg rounded-xl px-4 py-3">
-      <p className="text-xs text-gray-400 font-bold uppercase mb-1">{label}</p>
-      <p className="text-sm font-black text-primary">
+      <p className="text-xs text-slate-400 font-semibold uppercase mb-1">{label}</p>
+      <p className="text-sm font-bold text-primary">
         {Number(payload[0].value || 0).toLocaleString()} đ
       </p>
     </div>
@@ -50,7 +50,7 @@ const StaffDashboard = () => {
   return (
     <div className="space-y-4 md:space-y-6">
       <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
-        <h2 className="text-2xl font-black text-gray-900">Bảng Điều Khiển Bán Hàng</h2>
+        <h2 className="text-2xl font-bold text-slate-900">Bảng Điều Khiển Bán Hàng</h2>
         <p className="text-sm text-gray-500 mt-1">
           Theo dõi doanh thu theo giờ và hiệu suất theo tháng.
         </p>
@@ -82,7 +82,7 @@ const StaffDashboard = () => {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 md:gap-6">
         <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Doanh Thu Theo Giờ (Hôm Nay)</h3>
+          <h3 className="text-lg font-bold text-slate-900 mb-4">Doanh Thu Theo Giờ (Hôm Nay)</h3>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={hourlyRevenue}>
@@ -103,7 +103,7 @@ const StaffDashboard = () => {
         </div>
 
         <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Doanh Thu Theo Tháng</h3>
+          <h3 className="text-lg font-bold text-slate-900 mb-4">Doanh Thu Theo Tháng</h3>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={monthlyRevenue}>

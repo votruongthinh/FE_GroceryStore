@@ -254,9 +254,6 @@ const Login = () => {
             <h1 className="text-5xl font-black leading-tight">
               Quản lý cửa hàng rõ ràng, nhanh và đúng phiên đăng nhập.
             </h1>
-            <p className="mt-4 max-w-xl text-sm font-medium leading-6 text-white/75">
-              Admin và nhân viên có thể làm việc ở các tab khác nhau, reload vẫn quay lại đúng khu vực đang dùng.
-            </p>
           </div>
         </section>
 
@@ -269,11 +266,6 @@ const Login = () => {
               <h2 className="text-2xl font-black text-slate-950">
                 {isLoginMode ? "Đăng nhập hệ thống" : "Tạo tài khoản mới"}
               </h2>
-              <p className="mt-2 text-sm font-medium text-slate-500">
-                {isLoginMode
-                  ? "Nhập email và mật khẩu để tiếp tục."
-                  : "Tài khoản mới sẽ dùng vai trò nhân viên mặc định."}
-              </p>
             </div>
 
             {serverError ? (
@@ -363,9 +355,6 @@ const Login = () => {
               >
                 {isLoginMode ? "Chưa có tài khoản? Đăng ký" : "Đã có tài khoản? Đăng nhập"}
               </button>
-              <Link to="/" className="font-semibold text-slate-400 transition hover:text-slate-600">
-                Trang chính
-              </Link>
             </div>
           </div>
         </section>

@@ -37,7 +37,7 @@ const Inventory = () => {
   return (
     <div className="space-y-4 md:space-y-6">
       <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
-        <h2 className="text-2xl font-black text-gray-900">Quản Lý Kho</h2>
+        <h2 className="text-2xl font-bold text-slate-900">Quản Lý Kho</h2>
         <p className="text-sm text-gray-500 mt-1">
           Theo dõi tồn kho để báo admin kịp thời khi hàng sắp hết.
         </p>
@@ -46,15 +46,15 @@ const Inventory = () => {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
         <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
           <p className="text-sm text-gray-500 font-medium">Tổng Mặt Hàng</p>
-          <p className="text-3xl font-black text-gray-900 mt-1">{totalItem.toLocaleString()}</p>
+          <p className="text-3xl font-bold text-slate-900 mt-1">{totalItem.toLocaleString()}</p>
         </div>
         <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
           <p className="text-sm text-gray-500 font-medium">Sắp Hết Hàng (&lt; {threshold})</p>
-          <p className="text-3xl font-black text-amber-600 mt-1">{totalLowStock.toLocaleString()}</p>
+          <p className="text-3xl font-bold text-amber-600 mt-1">{totalLowStock.toLocaleString()}</p>
         </div>
         <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm md:p-6">
           <p className="text-sm text-gray-500 font-medium">Hết Hàng (Trang Hiện Tại)</p>
-          <p className="text-3xl font-black text-red-600 mt-1">{outOfStockCount.toLocaleString()}</p>
+          <p className="text-3xl font-bold text-red-600 mt-1">{outOfStockCount.toLocaleString()}</p>
         </div>
       </div>
 
@@ -108,10 +108,10 @@ const Inventory = () => {
           <table className="min-w-[680px] w-full border-collapse text-left text-sm">
             <thead>
               <tr className="bg-gray-50 text-gray-500 text-sm border-b border-gray-100">
-                <th className="px-3 py-3 font-medium md:px-6 md:py-4">Sản Phẩm</th>
-                <th className="px-3 py-3 font-medium md:px-6 md:py-4">Giá Bán</th>
-                <th className="px-3 py-3 font-medium md:px-6 md:py-4">Tồn Kho</th>
-                <th className="px-3 py-3 font-medium md:px-6 md:py-4">Canh Báo</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Sản Phẩm</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Giá Bán</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Tồn Kho</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Canh Báo</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -146,7 +146,7 @@ const Inventory = () => {
                       </td>
                       <td className="px-3 py-3 md:px-6 md:py-4">
                         <span
-                          className={`px-2.5 py-1 rounded-full text-xs font-bold ${
+                          className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
                             isOut
                               ? "bg-red-100 text-red-700"
                               : isLow
@@ -159,7 +159,7 @@ const Inventory = () => {
                       </td>
                       <td className="px-3 py-3 md:px-6 md:py-4">
                         {isLow ? (
-                          <span className="inline-flex items-center gap-1 text-amber-600 text-xs font-bold">
+                          <span className="inline-flex items-center gap-1 text-amber-600 text-xs font-semibold">
                             <AlertTriangle className="w-4 h-4" />
                             Sắp hết
                           </span>

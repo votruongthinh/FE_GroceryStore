@@ -37,7 +37,7 @@ const SidebarItem = ({ icon, label, to, onClick }) => (
     {({ isActive }) => (
       <>
         {createElement(icon, { className: `mr-3 h-5 w-5 transition-transform duration-300 ${isActive ? "scale-110" : "group-hover:scale-110"}` })}
-        <span className="font-bold text-sm">{label}</span>
+        <span className="font-semibold text-sm">{label}</span>
         {isActive && <ChevronRight className="ml-auto h-4 w-4 opacity-50" />}
       </>
     )}
@@ -121,8 +121,8 @@ const AppLayout = ({ role }) => {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark text-white shadow-lg shadow-primary/25 transition-transform hover:rotate-6">
               <Store className="h-6 w-6" />
             </div>
-            <span className="text-xl font-black tracking-tight text-slate-900">
-              GroceryPOS
+            <span className="text-xl font-bold tracking-tight text-slate-900">
+              RiceTiNi
             </span>
           </div>
           <button
@@ -134,7 +134,7 @@ const AppLayout = ({ role }) => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 py-2 custom-scrollbar">
-          <p className="mb-4 px-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 opacity-70">
+          <p className="mb-4 px-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
             Menu chính
           </p>
           <nav className="space-y-1">
@@ -154,19 +154,19 @@ const AppLayout = ({ role }) => {
           <div className="bg-slate-50 rounded-[2rem] p-2 border border-slate-100">
             <div className="flex items-center space-x-3 p-2">
               <div className="relative">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-black text-primary shadow-sm ring-2 ring-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-bold text-primary shadow-sm ring-2 ring-white">
                   {user?.fullName?.charAt(0)?.toUpperCase() || "A"}
                 </div>
                 <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white"></div>
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-black text-slate-900">{user?.fullName || "Admin"}</p>
-                <p className="truncate text-[10px] font-bold text-primary uppercase tracking-wider opacity-70">{roleLabel}</p>
+                <p className="truncate text-sm font-bold text-slate-900">{user?.fullName || "Admin"}</p>
+                <p className="truncate text-[11px] font-semibold text-primary uppercase tracking-wider opacity-70">{roleLabel}</p>
               </div>
             </div>
             <button
               onClick={handleLogout}
-              className="flex w-full items-center justify-center space-x-2 rounded-2xl bg-white px-4 py-3 text-xs font-black text-red-500 shadow-sm transition-all hover:bg-red-50 hover:text-red-600 active:scale-95 border border-red-100/50 mt-1"
+              className="flex w-full items-center justify-center space-x-2 rounded-2xl bg-white px-4 py-3 text-xs font-bold text-red-500 shadow-sm transition-all hover:bg-red-50 hover:text-red-600 active:scale-95 border border-red-100/50 mt-1"
             >
               <LogOut className="h-4 w-4" />
               <span>ĐĂNG XUẤT</span>
@@ -186,10 +186,10 @@ const AppLayout = ({ role }) => {
               <Menu className="h-6 w-6" />
             </button>
             <div className="min-w-0">
-              <h1 className="truncate text-lg font-black text-slate-900 md:text-xl">
+              <h1 className="truncate text-lg font-bold text-slate-900 md:text-xl">
                 {role === "admin" ? "Bảng quản trị" : "Bảng nhân viên"}
               </h1>
-              <p className="hidden truncate text-xs font-bold text-slate-400 uppercase tracking-wider sm:block opacity-60">
+              <p className="hidden truncate text-xs font-medium text-slate-400 uppercase tracking-wider sm:block opacity-60">
                 {role === "admin" ? "Theo dõi và vận hành cửa hàng" : "Bán hàng và kiểm tra kho"}
               </p>
             </div>
@@ -200,12 +200,12 @@ const AppLayout = ({ role }) => {
             <div className="h-8 w-[1px] bg-slate-100 hidden sm:block"></div>
             <div className="flex items-center gap-3 group cursor-pointer">
               <div className="hidden flex-col text-right sm:flex">
-                <span className="truncate text-sm font-black text-slate-900 group-hover:text-primary transition-colors">
+                <span className="truncate text-sm font-semibold text-slate-900 group-hover:text-primary transition-colors">
                   {user?.fullName || "Xin chào"}
                 </span>
-                <span className="truncate text-[10px] font-black text-primary uppercase tracking-widest opacity-70">{roleLabel}</span>
+                <span className="truncate text-[11px] font-semibold text-primary uppercase tracking-widest opacity-70">{roleLabel}</span>
               </div>
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 font-black text-primary shadow-sm transition-transform group-hover:scale-105">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 font-bold text-primary shadow-sm transition-transform group-hover:scale-105">
                 {user?.fullName?.charAt(0)?.toUpperCase() || "U"}
               </div>
             </div>

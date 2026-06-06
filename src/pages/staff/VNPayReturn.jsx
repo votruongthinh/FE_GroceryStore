@@ -83,12 +83,12 @@ const VNPayReturn = () => {
               {order && (
                 <div className="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between">
                   <div className="text-left">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Mã đơn hàng</p>
+                    <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest leading-none mb-1">Mã đơn hàng</p>
                     <p className="font-bold text-slate-700">#HD{order.id.toString().padStart(6, '0')}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Tổng tiền</p>
-                    <p className="font-black text-primary italic">{Number(order.total).toLocaleString()} đ</p>
+                    <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest leading-none mb-1">Tổng tiền</p>
+                    <p className="font-bold text-primary italic">{Number(order.total).toLocaleString()} đ</p>
                   </div>
                 </div>
               )}
@@ -97,7 +97,7 @@ const VNPayReturn = () => {
               {order && (
                 <button
                   onClick={() => setShowReceipt(true)}
-                  className="w-full bg-slate-900 hover:bg-black text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-slate-900/20 flex items-center justify-center gap-3 text-sm uppercase tracking-widest active:scale-95"
+                  className="w-full bg-slate-900 hover:bg-black text-white font-bold py-4 rounded-2xl transition-all shadow-xl shadow-slate-900/20 flex items-center justify-center gap-3 text-sm uppercase tracking-widest active:scale-95"
                 >
                   <Receipt className="w-5 h-5" />
                   XUẤT HÓA ĐƠN
@@ -143,13 +143,13 @@ const VNPayReturn = () => {
               <div className="flex gap-1 p-1 bg-slate-100 rounded-xl">
                 <button 
                   onClick={() => setReceiptType("pos")}
-                  className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${receiptType === 'pos' ? 'bg-white text-primary shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${receiptType === 'pos' ? 'bg-white text-primary shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
                 >
                   Bill K80
                 </button>
                 <button 
                   onClick={() => setReceiptType("a4")}
-                  className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${receiptType === 'a4' ? 'bg-white text-primary shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${receiptType === 'a4' ? 'bg-white text-primary shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
                 >
                   Hóa đơn A4
                 </button>
@@ -177,7 +177,7 @@ const VNPayReturn = () => {
             <div className="p-6 bg-white border-t border-slate-100 flex gap-3 print:hidden">
               <button 
                 onClick={() => window.print()}
-                className="flex-1 py-4 bg-slate-900 hover:bg-slate-950 text-white font-black rounded-2xl transition-all shadow-xl shadow-slate-900/10 flex items-center justify-center gap-3 text-sm uppercase tracking-widest active:scale-95"
+                className="flex-1 py-4 bg-slate-900 hover:bg-slate-950 text-white font-bold rounded-2xl transition-all shadow-xl shadow-slate-900/10 flex items-center justify-center gap-3 text-sm uppercase tracking-widest active:scale-95"
               >
                 <Printer className="w-5 h-5" />
                 In hóa đơn

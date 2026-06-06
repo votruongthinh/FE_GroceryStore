@@ -91,7 +91,7 @@ const StaffOrders = () => {
     <div className="space-y-4 md:space-y-6">
       <div className="flex flex-col justify-between gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm sm:flex-row sm:items-center md:p-6">
         <div>
-          <h2 className="text-xl font-black text-gray-800 flex items-center">
+          <h2 className="text-xl font-bold text-slate-800 flex items-center">
             <History className="w-6 h-6 mr-2 text-primary" /> Lịch sử đơn hàng
           </h2>
           <p className="text-gray-400 text-sm mt-1">
@@ -99,8 +99,8 @@ const StaffOrders = () => {
           </p>
         </div>
         <div className="text-left sm:text-right">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Doanh Thu (Trang Hiện Tại)</p>
-          <p className="text-2xl font-black text-primary">
+          <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Doanh Thu (Trang Hiện Tại)</p>
+          <p className="text-2xl font-bold text-primary">
             {revenue.toLocaleString()} <span className="text-xs">đ</span>
           </p>
         </div>
@@ -110,7 +110,7 @@ const StaffOrders = () => {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => updateFilterType("today")}
-            className={`px-3 py-2 rounded-lg text-sm font-bold ${
+            className={`px-3 py-2 rounded-lg text-sm font-semibold ${
               filterType === "today" ? "bg-primary text-white" : "bg-gray-100 text-gray-600"
             }`}
           >
@@ -118,7 +118,7 @@ const StaffOrders = () => {
           </button>
           <button
             onClick={() => updateFilterType("month")}
-            className={`px-3 py-2 rounded-lg text-sm font-bold ${
+            className={`px-3 py-2 rounded-lg text-sm font-semibold ${
               filterType === "month" ? "bg-primary text-white" : "bg-gray-100 text-gray-600"
             }`}
           >
@@ -126,7 +126,7 @@ const StaffOrders = () => {
           </button>
           <button
             onClick={() => updateFilterType("range")}
-            className={`px-3 py-2 rounded-lg text-sm font-bold ${
+            className={`px-3 py-2 rounded-lg text-sm font-semibold ${
               filterType === "range" ? "bg-primary text-white" : "bg-gray-100 text-gray-600"
             }`}
           >
@@ -201,11 +201,11 @@ const StaffOrders = () => {
           <table className="min-w-[780px] w-full border-collapse text-left text-sm">
             <thead>
               <tr className="bg-gray-50/50 text-gray-400 text-xs uppercase tracking-tighter border-b border-gray-100">
-                <th className="px-3 py-3 font-black md:px-6 md:py-4">Mã đơn</th>
-                <th className="px-3 py-3 font-black md:px-6 md:py-4">Thời gian</th>
-                <th className="px-3 py-3 font-black md:px-6 md:py-4">Thanh toán</th>
-                <th className="px-3 py-3 font-black md:px-6 md:py-4">Trạng thái</th>
-                <th className="px-3 py-3 text-right font-black md:px-6 md:py-4">Tổng tiền</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Mã đơn</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Thời gian</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Thanh toán</th>
+                <th className="px-3 py-3 font-semibold md:px-6 md:py-4">Trạng thái</th>
+                <th className="px-3 py-3 text-right font-semibold md:px-6 md:py-4">Tổng tiền</th>
                 <th className="w-10 px-3 py-3 md:px-6 md:py-4"></th>
               </tr>
             </thead>
@@ -235,7 +235,7 @@ const StaffOrders = () => {
                       onClick={() => toggleExpand(order.id)}
                     >
                       <td className="px-3 py-3 md:px-6 md:py-4">
-                        <span className="font-black text-gray-800">#{order.id}</span>
+                        <span className="font-bold text-slate-800">#{order.id}</span>
                       </td>
                       <td className="px-3 py-3 md:px-6 md:py-4">
                         <div className="flex items-center text-sm text-gray-600">
@@ -247,17 +247,17 @@ const StaffOrders = () => {
                         </div>
                       </td>
                       <td className="px-3 py-3 md:px-6 md:py-4">
-                        <div className="flex items-center text-xs font-bold text-gray-500 uppercase">
+                        <div className="flex items-center text-xs font-semibold text-slate-500 uppercase">
                           <CreditCard className="w-3.5 h-3.5 mr-1.5 text-primary/40" />
                           {order.paymentMethod}
                         </div>
                       </td>
                       <td className="px-3 py-3 md:px-6 md:py-4">
-                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${getStatusBadgeClass(order.status)}`}>
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${getStatusBadgeClass(order.status)}`}>
                           {order.status}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-right font-black text-gray-900 md:px-6 md:py-4">
+                      <td className="px-3 py-3 text-right font-bold text-slate-900 md:px-6 md:py-4">
                         {Number(order.total).toLocaleString()} đ
                       </td>
                       <td className="px-3 py-3 md:px-6 md:py-4">
@@ -274,7 +274,7 @@ const StaffOrders = () => {
                           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                             <table className="w-full text-sm">
                               <thead className="bg-gray-50 border-b border-gray-100">
-                                <tr className="text-gray-400 text-[10px] font-black uppercase">
+                                <tr className="text-slate-400 text-[10px] font-semibold uppercase">
                                   <th className="px-4 py-2 text-left">Sảm Phẩm</th>
                                   <th className="px-4 py-2 text-center">Số Lượng</th>
                                   <th className="px-4 py-2 text-right">Đơn giá</th>
@@ -285,7 +285,7 @@ const StaffOrders = () => {
                                 {order.OrderDetails?.map((detail) => (
                                   <tr key={`${detail.orderId}-${detail.productId}`}>
                                     <td className="px-4 py-3">
-                                      <p className="font-bold text-gray-800">{detail.Product?.productName}</p>
+                                      <p className="font-semibold text-slate-800">{detail.Product?.productName}</p>
                                       <p className="text-[10px] text-gray-400">{detail.Product?.productCode}</p>
                                     </td>
                                     <td className="px-4 py-3 text-center">{detail.amount}</td>
